@@ -2,12 +2,23 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import Button from "./Button";
+import Button from "./components/Button/Button";
 import Paragraph from "./components/Paragraph";
+
+function createRandomColor() {
+  return "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
+}
 
 function App() {
   const [count, setCount] = useState(0);
   const [content, setContent] = useState("Orange man is disrespectful");
+  const [color, setColor] = useState("#8f8f22");
+
+  function handleChangeColor() {
+    let newColor = createRandomColor();
+
+    setColor(newColor);
+  }
 
   return (
     <>
@@ -19,7 +30,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Welcome to React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -34,11 +45,19 @@ function App() {
         <button onClick={() => setContent("Big Z is on their own")}>
           Change content
         </button>
-
-        <Button onClick={() => setContent("Big Z is on their own")}>
-          My Button
-        </Button>
       </div>
+
+      <section
+        style={{
+          backgroundColor: color,
+          padding: "1.5rem",
+          borderRadius: "1rem",
+        }}
+      >
+        <h2>Change the color of this section background color</h2>
+
+        <button onClick={handleChangeColor}>Change color</button>
+      </section>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
