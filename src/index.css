@@ -66,3 +66,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.bg-red {
+  background-color: red;
+}
+
+body:has(.app) {
+  background-color: green;
+}
+
+body:has(.app.is-colored) {
+  background-color: brown;
+}

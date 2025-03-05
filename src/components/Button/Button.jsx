@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+// This is how we use cdd modules which comes included with Vite
 import classes from "./Button.module.css";
 
 export default function Button({ children }) {
