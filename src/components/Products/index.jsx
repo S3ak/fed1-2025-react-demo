@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 
 const API = "https://dummyjson.com/products";
 
@@ -35,8 +36,10 @@ export default function Products() {
         {query.data?.map((product) => {
           return (
             <div key={product.id}>
-              <div>{product.title}</div>
-              <strong>{product.price}</strong>
+              <Link to={`/products/${product.id}`}>
+                <div>{product.title}</div>
+                <strong>{product.price}</strong>
+              </Link>
             </div>
           );
         })}
