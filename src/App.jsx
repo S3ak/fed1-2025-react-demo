@@ -1,12 +1,18 @@
 import "./App.css";
 import Basic from "./components/Basic";
 import Products from "./components/Products";
+import Nav from "./components/Nav";
 
 function App() {
   return (
-    <main>
-      <Products />
-    </main>
+    <>
+      <header>
+        <Nav />
+      </header>
+      <main>
+        <Products />
+      </main>
+    </>
   );
 }
 
