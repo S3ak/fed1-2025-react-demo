@@ -3,31 +3,33 @@ import { useParams } from "react-router";
 
 const API = "https://dummyjson.com/products/";
 
+async function getProductById({ queryKey }) {
+  if (!queryKey[1]) throw new Error("No product ID was found");
+
+  const response = await fetch(API + queryKey[1]);
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
+  return data;
+}
+
 export default function Product() {
   let { productId } = useParams();
 
-  const query = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["product", productId],
-    queryFn: async ({ queryKey }) => {
-      const response = await fetch(API + queryKey[1]);
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data;
-    },
+    queryFn: getProductById,
   });
 
-  if (query.isLoading) {
+  if (isLoading) {
     return <div>Loading....</div>;
   }
 
-  if (query.isError) {
+  if (isError) {
     return <div>Something went wrong</div>;
   }
-
-  const product = query.data;
 
   return (
     <article>
@@ -37,8 +39,8 @@ export default function Product() {
 
       <section>
         <div>
-          <h1>{product.title}</h1>
-          <strong>{product.price}</strong>
+          <h1>{data.title}</h1>
+          <strong>{data.price}</strong>
         </div>
       </section>
     </article>
