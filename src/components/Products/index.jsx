@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import styles from "./products.module.css";
+import { Link } from "react-router";
 
 const API = "https://dummyjson.com/products";
 
@@ -31,13 +33,15 @@ export default function Products() {
         <h2>List of Products</h2>
       </section>
 
-      <section>
+      <section className={styles.list}>
         {query.data?.map((product) => {
           return (
-            <div key={product.id}>
-              <div>{product.title}</div>
-              <strong>{product.price}</strong>
-            </div>
+            <article className="p-8 bg-gray-600 rounded-3xl" key={product.id}>
+              <Link to={`products/${product.id}`}>
+                <h4 className={styles.title}>{product.title}</h4>
+                <strong>{product.price}</strong>
+              </Link>
+            </article>
           );
         })}
       </section>
